@@ -7,7 +7,7 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class SpringHelloTest {
+public class AppTest {
 
     @Test
     public void test() {
@@ -18,7 +18,7 @@ public class SpringHelloTest {
 
         System.setOut(controlledOut);
 
-        SpringHello.main(new String[]{});
+        App.main(new String[]{});
 
         controlledOut.flush();
         assertEquals("Hello, Autocode!", sink.toString().trim());

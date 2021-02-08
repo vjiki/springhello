@@ -59,7 +59,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <MainClass>com.github.vjiki.spinghello.SpringHello</MainClass>
+                            <MainClass>com.github.vjiki.spinghello.App</MainClass>
                         </manifest>
                     </archive>
                 </configuration>

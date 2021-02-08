@@ -7,8 +7,13 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
-        <bean id="iam" class="com.github.vjiki.springhello.PersonBean">
-            <constructor-arg value="Sergey" />
-            <constructor-arg value="41" />
-        </bean>
+            <bean id="windowBean"
+              class="com.github.vjiki.springhello.PlasticWindow">
+            </bean>
+
+            <bean id="houseBean"
+                    class="com.github.vjiki.springhello.House">
+                    <constructor-arg ref="windowBean"/>
+                    <constructor-arg value="3"/>
+            </bean>
 </beans>

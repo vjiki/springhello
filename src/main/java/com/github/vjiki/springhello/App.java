@@ -13,8 +13,13 @@ public class App {
 
         House house = context.getBean("houseBean", House.class);
 
+        house.buildWall();
         house.view();
         System.out.printf("House height %d \n", house.getHeight());
+
+        MainWindow window = context.getBean(MainWindow.class);
+
+        window.show();
 
         context.close();
     }

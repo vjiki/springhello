@@ -4,13 +4,30 @@ package com.github.vjiki.springhello;
 public class House {
     private Window window;
     private int height;
+    private Material wall;
 
-//    public House() {
+
+    //    public House() {
 //    }
 
     public House(Window window ) { //, int height) {
         this.window = window;
         //this.height = height;
+    }
+
+    public void buildWall() {
+        for (int i=1; i <= getHeight(); i++) {
+            System.out.printf("Floor %d. ", i);
+            getWall().cover();
+        }
+    }
+
+    public Material getWall() {
+        return wall;
+    }
+
+    public void setWall(Material wall) {
+        this.wall = wall;
     }
 
     public Window getWindow() {

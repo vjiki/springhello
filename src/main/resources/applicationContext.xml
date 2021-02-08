@@ -7,6 +7,14 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
+            <bean id="brickBean"
+                  class="com.github.vjiki.springhello.Brick">
+            </bean>
+
+            <bean id="woodBean"
+                  class="com.github.vjiki.springhello.Wood">
+            </bean>
+
             <bean id="windowBean"
               class="com.github.vjiki.springhello.PlasticWindow">
             </bean>
@@ -18,5 +26,14 @@
                     <constructor-arg value="3"/>
                     -->
                     <property name="height" value="2" />
+                    <property name="wall" ref="woodBean" />
+            </bean>
+
+            <bean id="mainWindowBean"
+                  class="com.github.vjiki.springhello.MainWindow"
+                  factory-method="getInstance"
+                  init-method="openConnection"
+                  destroy-method="closeConnection"
+            >
             </bean>
 </beans>

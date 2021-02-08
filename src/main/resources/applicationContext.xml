@@ -1,39 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="
-            http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-            http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
-            <bean id="brickBean"
-                  class="com.github.vjiki.springhello.Brick">
-            </bean>
+    <!--
+           xmlns:p="http://www.springframework.org/schema/p"
+     what else can be added in this xml context file?
+     <jms
+     <aop
+     <lang  - component that implemented in another language, for example ruby
+              or bean shell or some script language
+     <util
+     <oxm  - xml
+     <tx   - transactions
+    -->
 
-            <bean id="woodBean"
-                  class="com.github.vjiki.springhello.Wood">
-            </bean>
 
-            <bean id="windowBean"
-              class="com.github.vjiki.springhello.PlasticWindow">
-            </bean>
+    <bean id="brickBean"
+          class="com.github.vjiki.springhello.Brick"
+          scope="prototype"
+    >
+    </bean>
 
-            <bean id="houseBean"
-                    class="com.github.vjiki.springhello.House">
-                    <constructor-arg ref="windowBean"/>
-                    <!--
-                    <constructor-arg value="3"/>
-                    -->
-                    <property name="height" value="2" />
-                    <property name="wall" ref="woodBean" />
-            </bean>
+    <bean id="woodBean"
+          class="com.github.vjiki.springhello.Wood"
+          scope="prototype"
+    >
+    </bean>
 
-            <bean id="mainWindowBean"
-                  class="com.github.vjiki.springhello.MainWindow"
-                  factory-method="getInstance"
-                  init-method="openConnection"
-                  destroy-method="closeConnection"
-            >
-            </bean>
+    <bean id="windowBean"
+      class="com.github.vjiki.springhello.PlasticWindow">
+    </bean>
+
+    <bean id="outDoor"
+          class="com.github.vjiki.springhello.MetalDoor">
+    </bean>
+
+    <bean id="innerDoor"
+          class="com.github.vjiki.springhello.WoodDoor"
+          scope="prototype"
+    >
+    </bean>
+
+    <bean id="houseBean"
+        class="com.github.vjiki.springhello.House">
+        <constructor-arg ref="windowBean"/>
+        <!--
+        <constructor-arg value="3"/>
+        -->
+
+        <property name="height" value="2" />
+        <!--
+       <property name="wall" ref="brickBean" />
+       -->
+        <!--
+        below is implementation of inner class
+        the component will be visible only inside
+        the top class
+        like inner class in java
+        -->
+        <property name="wall">
+            <bean class="com.github.vjiki.springhello.Brick"
+                  scope="prototype"/>
+        </property>
+
+        <property name="doors">
+            <list>
+                <ref bean="outDoor" />
+                <ref bean="innerDoor" />
+            </list>
+        </property>
+
+   </bean>
+
+   <bean id="mainWindowBean"
+         class="com.github.vjiki.springhello.MainWindow"
+         factory-method="getInstance"
+         init-method="openConnection"
+         destroy-method="closeConnection"
+   >
+   </bean>
 </beans>

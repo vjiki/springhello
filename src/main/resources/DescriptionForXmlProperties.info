@@ -1,0 +1,38 @@
+Property for bean name "scope"
+
+// Scope
+// in the context the object will be
+// by default: singleton in the context
+//
+// another way is
+// prototype: possible to create a new objects
+// when you access the object the new object will be
+// created (for example, brick)
+//
+// For web applications
+//
+// session
+// alive for a full session
+// stateful
+//
+// request
+// alive when http is under handling
+//
+//
+// global-session
+// global http context for all
+
+
+// in the other context (ClassPathXmlApplicationContext)
+// there will be another object
+
+
+
+Property for collection:
+
+<list> allows duplicates
+<set>  duplications are not allowed
+        -- необходимо чтобы работало сравнение перегрузить методы
+        -- hash code & equals
+<map>
+<props>  - it is map with strings (only text possible)

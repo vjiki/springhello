@@ -8,9 +8,9 @@ public class House {
 //    public House() {
 //    }
 
-    public House(Window window, int height) {
+    public House(Window window ) { //, int height) {
         this.window = window;
-        this.height = height;
+        //this.height = height;
     }
 
     public Window getWindow() {

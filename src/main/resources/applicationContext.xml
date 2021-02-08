@@ -14,6 +14,9 @@
             <bean id="houseBean"
                     class="com.github.vjiki.springhello.House">
                     <constructor-arg ref="windowBean"/>
+                    <!--
                     <constructor-arg value="3"/>
+                    -->
+                    <property name="height" value="2" />
             </bean>
 </beans>

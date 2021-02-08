@@ -1,5 +1,6 @@
 package com.github.vjiki.springhello;
 
+//POJO
 public class PersonBean {
     private String name;
     private int age;

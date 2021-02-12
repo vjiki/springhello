@@ -1,6 +1,7 @@
 package com.github.vjiki.springhello;
 
 import java.util.Collection;
+import java.util.Map;
 
 //POJO
 public class House {
@@ -9,6 +10,10 @@ public class House {
     private Material wall;
 
     private Collection<Door> doors;
+    // private List<Door> doors;
+    // private Door[] doors;
+
+    private Map<String,Door> doorsWithKey;
 
     //    public House() {
 //    }
@@ -28,6 +33,14 @@ public class House {
     public void installDoors() {
         for(Door door : doors) {
             door.install();
+        }
+    }
+
+
+    public void installDoorsWithKey() {
+        for(Map.Entry<String, Door> e: doorsWithKey.entrySet()) {
+            System.out.printf("Key %s. ", e.getKey() );
+            e.getValue().install();
         }
     }
 
@@ -65,5 +78,14 @@ public class House {
 
     public void setDoors(Collection<Door> doors) {
         this.doors = doors;
+    }
+
+
+    public Map<String, Door> getDoorsWithKey() {
+        return doorsWithKey;
+    }
+
+    public void setDoorsWithKey(Map<String, Door> doorsWithKey) {
+        this.doorsWithKey = doorsWithKey;
     }
 }

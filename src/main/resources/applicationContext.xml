@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
-
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
     <!--
            xmlns:p="http://www.springframework.org/schema/p"
      what else can be added in this xml context file?
@@ -46,13 +48,46 @@
     >
     </bean>
 
+    <bean id="keySelector"
+          class="com.github.vjiki.springhello.KeySelector"
+    >
+    </bean>
+
     <bean id="houseBean"
         class="com.github.vjiki.springhello.House">
         <constructor-arg ref="windowBean"/>
         <!--
         <constructor-arg value="3"/>
-        -->
 
+
+        <property name="height" value="2" />
+                -->
+        <!-- SPeL spring language
+         is spring method to init the value
+        value="#{innerDoor}"
+        value="#{1}"
+        value="#{1.5}"
+        value="#{1e5}"
+        value="#{windowBean.width}" - get it from context
+
+        for static methods/fields
+        value="#{T(java.lang.math.PI)}"
+        <constructor-arg ref="windowBean" value=#{windowBean.getGlass()?.width}/>
+        to not get pointer exception use "?." and if the glass is null
+        then width will not be got
+        value="#{T(java.lang.math).random()}"
+        value="#{+ - * / }"
+        to use < -  lt
+        to use > - gt
+        to use == - eq
+        and or not !
+        ? :
+        windowBean.getGlass() eq null ? "glass" : windowBean.getGlass()
+        windowBean.getGlass() eq null ?: windowBean.getGlass()
+        windowBean.str matches 'regular expression'
+
+
+         -->
         <property name="height" value="2" />
         <!--
        <property name="wall" ref="brickBean" />
@@ -75,6 +110,18 @@
             </list>
         </property>
 
+        <property name="doorsWithKey">
+            <!--null/> -->
+            <map>
+<!--                <entry key="A" value-ref="outDoor" />-->
+<!--                <entry key="B" value-ref="innerDoor" />-->
+                <entry key="#{keySelector.getKey(outDoor)?.toUpperCase()}" value-ref="outDoor" />
+                <entry key="#{keySelector.getKey(innerDoor)?.toUpperCase()}" value-ref="innerDoor" />
+                <entry key="#{systemEnvironment['JAVA_HOME']}" value-ref="innerDoor" />
+                <entry key="#{systemProperties['application.name']}" value-ref="innerDoor" />
+            </map>
+        </property>
+
    </bean>
 
    <bean id="mainWindowBean"
@@ -84,4 +131,69 @@
          destroy-method="closeConnection"
    >
    </bean>
+
+
+    <util:list id="cities">
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Chicago" />
+            <property name="state" value="IL" />
+            <property name="population" value="2854114" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Atlanta" />
+            <property name="state" value="GA" />
+            <property name="population" value="537958" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Dallas" />
+            <property name="state" value="TX" />
+            <property name="population" value="1279910" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Houston" />
+            <property name="state" value="TX" />
+            <property name="population" value="2242193" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Odessa" />
+            <property name="state" value="TX" />
+            <property name="population" value="90943" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="El Paso" />
+            <property name="state" value="TX" />
+            <property name="population" value="613190" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Jal" />
+            <property name="state" value="NM" />
+            <property name="population" value="1996" />
+        </bean>
+        <bean class="com.github.vjiki.springhello.City" >
+            <property name="name" value="Las Cruces" />
+            <property name="state" value="NM" />
+            <property name="population" value="91865" />
+        </bean>
+        <!--
+        In some another bean we can assign new values to list entries
+        <property name="chosenCity" value="#{cities[T(java.lang.Math).random()*cities.size()]}">
+
+        If collection is map:
+        <property name="chosenCity" value="#{cities['Dallas']}">
+
+        it is possible to get properties from external file:
+        <util:properties id="jdbcSettings" location="classpath:jdbc.properties">
+
+        <property name="bigCities" value="#{cities.?[population gt 100000]}"/>
+        <property name="firstBigCities" value="#{cities.^[population gt 100000]}"/>
+        <property name="lastBigCities" value="#{cities.$[population gt 100000]}"/>
+        <property name="cityNames" value="#{cities.![name+', '+state]}"/>
+        <property name="cityNames" value="#{cities.?[population gt 100000].![name+', '+state]}"/>
+        -->
+
+    </util:list>
+
+    
+
+
 </beans>

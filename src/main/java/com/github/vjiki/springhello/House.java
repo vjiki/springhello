@@ -1,13 +1,30 @@
 package com.github.vjiki.springhello;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Collection;
 import java.util.Map;
 
 //POJO
+@Component // it will create a bean
 public class House {
     private Window window;
+
+    @Value("3") // здесь можно указывать SpEL
     private int height;
+
+    //@Autowired(required=false)
+    //@Qualifier("wood")
+    //@WoodQualifier
+    @Inject   // javax.inject
+    @Named("woodBean") //javax.inject
     private Material wall;
+
+
 
     private Collection<Door> doors;
     // private List<Door> doors;
@@ -18,6 +35,7 @@ public class House {
     //    public House() {
 //    }
 
+    @Autowired
     public House(Window window ) { //, int height) {
         this.window = window;
         //this.height = height;

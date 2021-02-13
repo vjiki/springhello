@@ -17,9 +17,9 @@ public class House {
     @Value("3") // здесь можно указывать SpEL
     private int height;
 
-    //@Autowired(required=false)
+    //@Autowired(required=false)  -- аналог inject
     //@Qualifier("wood")
-    //@WoodQualifier
+    //@WoodQualifier  // it is possible to create own annotations
     @Inject   // javax.inject
     @Named("woodBean") //javax.inject
     private Material wall;

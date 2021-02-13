@@ -36,3 +36,49 @@ Property for collection:
         -- hash code & equals
 <map>
 <props>  - it is map with strings (only text possible)
+
+
+
+How to decrease the xml
+-- Auto Wiring
+it is possible to use autoWiring if several classes uses the same
+types
+
+    - byName   - auto wiring by name
+    create a bean with the same name as property and
+    in main bean use autowire="byName"
+
+    - byType -
+    it tries to find component with the same type
+    if there are several components with the same type it
+    will lead to the exception
+    it is possible to priorityze with attribute primary
+    also it is possible to exclude the unneded using
+    autowire-candidate="false"
+
+    - constructor
+    autowire="constractor"
+    check if there bean with constructor then use this
+    bean with constructor
+
+    - default
+    don't understand what this means
+
+
+
+
+-- Annotations
+use annotations
+
+@Component   - component of Spring
+
+@Controller --- MVC  controller
+
+@Repository - repository with data
+
+@Service    -
+
+
+
+
+-- or ...

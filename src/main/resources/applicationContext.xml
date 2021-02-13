@@ -9,6 +9,14 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/util
        http://www.springframework.org/schema/util/spring-util.xsd">
+
+<!--    global settings-->
+<!--    for all beans will be autowiring by name-->
+<!--    to exclude autowire=no for some components-->
+<!--    default-autowire="byName"-->
+<!--    default-init-method=""-->
+<!--    default-destroy-method=""-->
+
     <!--
            xmlns:p="http://www.springframework.org/schema/p"
      what else can be added in this xml context file?
@@ -21,16 +29,34 @@
      <tx   - transactions
     -->
 
+    <bean id="wall"
+          class="com.github.vjiki.springhello.Wood"
+          scope="prototype"
+          primary="true"
+    >
+    </bean>
 
     <bean id="brickBean"
           class="com.github.vjiki.springhello.Brick"
           scope="prototype"
+          autowire-candidate="false"
     >
     </bean>
 
     <bean id="woodBean"
           class="com.github.vjiki.springhello.Wood"
           scope="prototype"
+          autowire-candidate="false"
+    >
+    </bean>
+
+    <!-- It is possible to inherit bean from another bean
+      or it is possible define abstract bean, this means it
+      will be not possible to get instanse of this bean
+      abstract="true"
+      -->
+    <bean id="houseBean2"
+          class="com.github.vjiki.springhello.House" parent="houseBean"
     >
     </bean>
 
@@ -53,8 +79,15 @@
     >
     </bean>
 
+
+
     <bean id="houseBean"
-        class="com.github.vjiki.springhello.House">
+        class="com.github.vjiki.springhello.House"
+          autowire="byName">
+<!--          autowire="default">-->
+<!--          autowire="constructor">-->
+<!--          autowire="byType">-->
+    <!--        autowire="byName">-->
         <constructor-arg ref="windowBean"/>
         <!--
         <constructor-arg value="3"/>
@@ -98,10 +131,10 @@
         the top class
         like inner class in java
         -->
-        <property name="wall">
-            <bean class="com.github.vjiki.springhello.Brick"
-                  scope="prototype"/>
-        </property>
+<!--        <property name="wall">-->
+<!--            <bean class="com.github.vjiki.springhello.Brick"-->
+<!--                  scope="prototype"/>-->
+<!--        </property>-->
 
         <property name="doors">
             <list>
@@ -192,8 +225,4 @@
         -->
 
     </util:list>
-
-    
-
-
 </beans>

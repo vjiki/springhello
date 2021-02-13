@@ -1,4 +1,4 @@
-package com.github.vjiki.springhello;
+package com.github.vjiki.springhello.builder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,18 +10,13 @@ import java.util.Collection;
 import java.util.Map;
 
 //POJO
-@Component // it will create a bean
 public class House {
     private Window window;
 
-    @Value("3") // здесь можно указывать SpEL
+    //@Value("3") // здесь можно указывать SpEL
     private int height;
 
-    //@Autowired(required=false)  -- аналог inject
-    //@Qualifier("wood")
-    //@WoodQualifier  // it is possible to create own annotations
-    @Inject   // javax.inject
-    @Named("woodBean") //javax.inject
+    @Autowired
     private Material wall;
 
 

@@ -30,21 +30,21 @@
     -->
 
     <bean id="wall"
-          class="com.github.vjiki.springhello.Wood"
+          class="com.github.vjiki.springhello.builder.Wood"
           scope="prototype"
           primary="true"
     >
     </bean>
 
     <bean id="brickBean"
-          class="com.github.vjiki.springhello.Brick"
+          class="com.github.vjiki.springhello.builder.Brick"
           scope="prototype"
           autowire-candidate="false"
     >
     </bean>
 
     <bean id="woodBean"
-          class="com.github.vjiki.springhello.Wood"
+          class="com.github.vjiki.springhello.builder.Wood"
           scope="prototype"
           autowire-candidate="false"
     >
@@ -56,33 +56,33 @@
       abstract="true"
       -->
     <bean id="houseBean2"
-          class="com.github.vjiki.springhello.House" parent="houseBean"
+          class="com.github.vjiki.springhello.builder.House" parent="houseBean"
     >
     </bean>
 
     <bean id="windowBean"
-      class="com.github.vjiki.springhello.PlasticWindow">
+      class="com.github.vjiki.springhello.builder.PlasticWindow">
     </bean>
 
     <bean id="outDoor"
-          class="com.github.vjiki.springhello.MetalDoor">
+          class="com.github.vjiki.springhello.builder.MetalDoor">
     </bean>
 
     <bean id="innerDoor"
-          class="com.github.vjiki.springhello.WoodDoor"
+          class="com.github.vjiki.springhello.builder.WoodDoor"
           scope="prototype"
     >
     </bean>
 
     <bean id="keySelector"
-          class="com.github.vjiki.springhello.KeySelector"
+          class="com.github.vjiki.springhello.builder.KeySelector"
     >
     </bean>
 
 
 
     <bean id="houseBean"
-        class="com.github.vjiki.springhello.House"
+        class="com.github.vjiki.springhello.builder.House"
           autowire="byName">
 <!--          autowire="default">-->
 <!--          autowire="constructor">-->
@@ -132,7 +132,7 @@
         like inner class in java
         -->
 <!--        <property name="wall">-->
-<!--            <bean class="com.github.vjiki.springhello.Brick"-->
+<!--            <bean class="com.github.vjiki.springhello.builder.Brick"-->
 <!--                  scope="prototype"/>-->
 <!--        </property>-->
 
@@ -158,7 +158,7 @@
    </bean>
 
    <bean id="mainWindowBean"
-         class="com.github.vjiki.springhello.MainWindow"
+         class="com.github.vjiki.springhello.builder.MainWindow"
          factory-method="getInstance"
          init-method="openConnection"
          destroy-method="closeConnection"
@@ -167,42 +167,42 @@
 
 
     <util:list id="cities">
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Chicago" />
             <property name="state" value="IL" />
             <property name="population" value="2854114" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Atlanta" />
             <property name="state" value="GA" />
             <property name="population" value="537958" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Dallas" />
             <property name="state" value="TX" />
             <property name="population" value="1279910" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Houston" />
             <property name="state" value="TX" />
             <property name="population" value="2242193" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Odessa" />
             <property name="state" value="TX" />
             <property name="population" value="90943" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="El Paso" />
             <property name="state" value="TX" />
             <property name="population" value="613190" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Jal" />
             <property name="state" value="NM" />
             <property name="population" value="1996" />
         </bean>
-        <bean class="com.github.vjiki.springhello.City" >
+        <bean class="com.github.vjiki.springhello.builder.City" >
             <property name="name" value="Las Cruces" />
             <property name="state" value="NM" />
             <property name="population" value="91865" />

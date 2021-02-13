@@ -1,4 +1,4 @@
-package com.github.vjiki.springhello;
+package com.github.vjiki.springhello.builder;
 
 public class WoodFrameWindow implements Window{
     @Override

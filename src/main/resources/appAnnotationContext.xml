@@ -27,7 +27,7 @@
 
 
 <!--    <context:include-filter type="assignable"-->
-<!--     expression="com.github.vjiki.springhello.Window"/>-->
+<!--     expression="com.github.vjiki.springhello.builder.Window"/>-->
 <!--    <context:exclude-filter/>-->
 
 

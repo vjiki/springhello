@@ -1,8 +1,6 @@
-package com.github.vjiki.springhello;
+package com.github.vjiki.springhello.builder;
 
-import org.springframework.stereotype.Component;
 
-@Component("woodBean")
 public class Wood implements Material{
     @Override
     public void cover() {

@@ -1,20 +1,22 @@
 package com.github.vjiki.springhello;
 
 
+import com.github.vjiki.springhello.builder.BuilderConfig;
+import com.github.vjiki.springhello.builder.House;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("appAnnotationContext.xml");
 
-        //Window window = context.getBean("windowBean", Window.class);
-        //new House(window).view(); // ручное внедрение
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(BuilderConfig.class);
 
         House house = context.getBean(House.class);
 
         house.buildWall();
 
+        house.view();
 
         context.close();
     }
